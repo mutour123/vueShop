@@ -8,6 +8,7 @@ if (!process.env.NODE_ENV) {
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
+var jsonServer = require('json-server')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
@@ -23,6 +24,16 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+var apiServer = jsonServer.create()
+var apiRouter = jsonServer.router('db.json')
+var middlewares = jsonServer.defaults()
+
+
+apiServer.use(middlewares)
+apiServer.use(apiRouter)
+apiServer.listen(port + 1,function(){
+  console.log('jsonServer is running')
+})
 
 var compiler = webpack(webpackConfig)
 
