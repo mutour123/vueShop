@@ -30,11 +30,16 @@ var middlewares = jsonServer.defaults()
 
 
 apiServer.use(middlewares)
-apiServer.use(apiRouter)
+apiServer.use(apiRouter);
+
+
 apiServer.listen(port + 1,function(){
   console.log('jsonServer is running')
 })
 
+
+
+ 
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {

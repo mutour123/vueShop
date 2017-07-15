@@ -18,7 +18,7 @@
 			<h2>最新消息</h2>
 			<ul>
 				<li v-for="item in newsList">
-					<a :href="item.url">{{item.title}}</a>
+					<a :href="item.url" class="new-item">{{item.title}}</a>
 				</li>
 			</ul>
 		</div>
@@ -47,9 +47,10 @@
 <script type="text/javascript">
 	export default{
 		created:function () {
-			this.$http.post('getList',{userId:'123'})
-			.then(function(data){
-				console.log(data)
+			this.$http.get('api/getNewsList')
+			.then(function(res){
+				// console.log(res.data)
+				this.newsList = res.data;
 			},function(err){
 				console.log(err)
 			})
@@ -87,23 +88,7 @@
 				        }
 				      ],
 				newsList:[
-					{
-				       title: '数据统计',
-				              url: 'http://starcraft.com'
-				            },
-				            {
-				              title: '数据预测',
-				              url: 'http://warcraft.com'
-				            },
-				            {
-				              title: '流量分析',
-				              url: 'http://overwatch.com',
-				              hot: true
-				            },
-				            {
-				              title: '广告发布',
-				              url: 'http://hearstone.com'
-				            }
+					
 				],
 				productFList:{
 					 pc: {
