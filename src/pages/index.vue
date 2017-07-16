@@ -26,7 +26,7 @@
 
 
 	<div class="index-right">
-		<!-- <slide-show :slides="slides"></slide-show> -->
+		<slide-show :slides="slides" :inv="invTime"></slide-show>
 		<div class="index-board-list">
 			<div 
 			class="index-board-item"
@@ -45,19 +45,49 @@
 </div>
 </template>
 <script type="text/javascript">
+import slideShow from "../components/sliderShow"
 	export default{
 		created:function () {
 			this.$http.get('api/getNewsList')
 			.then(function(res){
-				// console.log(res.data)
+				console.log(res.data)
+				console.log(res.data[0].title)
+
 				this.newsList = res.data;
 			},function(err){
 				console.log(err)
 			})
 		},
+
+		components:{
+			slideShow
+		},   
 		data(){
 			return{
-				   boardList: [
+				invTime:500,
+				 slides: [
+		        {
+		          src: require('../assets/slideShow/pic1.jpg'),
+		          title: 'xxx1',
+		          href: 'detail/analysis'
+		        },
+		        {
+		          src: require('../assets/slideShow/pic2.jpg'),
+		          title: 'xxx2',
+		          href: 'detail/count'
+		        },
+		        {
+		          src: require('../assets/slideShow/pic3.jpg'),
+		          title: 'xxx3',
+		          href: 'http://xxx.xxx.com'
+		        },
+		        {
+		          src: require('../assets/slideShow/pic4.jpg'),
+		          title: 'xxx4',
+		          href: 'detail/forecast'
+		        }
+		      ],
+						   boardList: [
 				    {
 				          title: '开放产品',
 				          description: '开放产品是一款开放产品',
@@ -140,6 +170,7 @@
 			}
 		}
 	}
+    
 </script>
 
 

@@ -5,13 +5,15 @@
         <img src="../assets/logo.png">
         <div class="head-nav">
           <ul class="nav-list">
-            <li>登录</li>
+            <li>{{username}}</li>
+            <li v-if="username!==''" class="nav-pile">|</li>
+            <li v-if="username!==''" >退出</li>
+            <li v-if="username==''" @click="logClick">登录</li>
+    
             <li class="nav-pile">|</li>
-            <li>退出</li>
-            <li class="nav-pile">|</li>
-            <li>注册</li>
-            <li class="nav-pile">|</li>
-            <li>关于</li>
+            <li v-if="username===''" @click="regClick">注册</li>
+            <li v-if="username===''" class="nav-pile">|</li>
+            <li @click="aboutClick">关于</li>
           </ul>
         </div>
       </div>
@@ -26,27 +28,68 @@
 		<div class="app-foot">
 			 <p>© 2016 fishenal MIT</p>
 		</div>
+    <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
+      <p>这里是相关介绍</p>
+    </my-dialog>
+
+    <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
+     <log-form @has-log="onSuccessLog"></log-form>
+    </my-dialog>
+    <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+      <reg-form></reg-form>
+    </my-dialog>
 	</div>
 </template>
 
 <script type="text/javascript">
+import myDialog from './dialog'
 import IndexPage from '../pages/index'
 import router from '../router'
+import LogForm from './LogForm'
+import RegForm from './RegForm'
 export default{
+    
 	name:'Layout',
 	data(){
 		return{
-			mes:'fjdlkf'
+			isShowAboutDialog:false,
+      isShowLogDialog:false,
+      isShowRegDialog:false,
+      username:''
+   
 		}
-
 	},
+
 	components:{
-		IndexPage
-	}
+		IndexPage,
+    myDialog,
+    LogForm,
+    RegForm
+	},
+  methods:{
+      aboutClick () {
+          this.isShowAboutDialog = true
+        },
+      logClick () {
+        this.isShowLogDialog = true
+      },
+      regClick () {
+        this.isShowRegDialog = true
+        },
+      closeDialog (attr) {
+        this[attr] = false
+      },
+      onSuccessLog (data) {
+        // console.log(data)
+        this.closeDialog ('isShowLogDialog')
+        this.username = data.username
+      }
+  }
+}
 
 
   // router
-}
+
 </script>
 
 

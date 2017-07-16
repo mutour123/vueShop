@@ -19,44 +19,24 @@
       "id": 4,
       "title": "新闻条4广告发布",
       "url": "http://hearstone.com"
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "id": 7
-    },
-    {
-      "id": 8
-    },
-    {
-      "id": 9
-    },
-    {
-      "id": 10
-    },
-    {
-      "id": 11
-    },
-    {
-      "id": 12
-    },
-    {
-      "id": 13
     }
   ],
   "login": {
-    "username": "yudongdong",
+    "username": "杨念",
     "userId": 123123
   },
   "getPrice": {
-    "amount": 678
+    "buyNumber": 3,
+    "buyType": 0,
+    "period": 1,
+    "version": "0,1"
   },
   "createOrder": {
-    "orderId": "6djk979"
+    "buyNumber": 0,
+    "buyType": 1,
+    "period": 1,
+    "version": "0,1",
+    "bankId": 301
   },
   "getOrderList": {
     "list": [
